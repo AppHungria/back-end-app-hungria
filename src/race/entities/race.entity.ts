@@ -12,5 +12,6 @@ export class Race {
     AvaliationPassenger: number
     Date : Date
     ComentPassenger: string
+    ComentDriver: string
 
 }

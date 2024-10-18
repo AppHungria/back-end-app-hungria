@@ -1,58 +1,66 @@
-import { IsEmail, IsNumber, IsString, Matches, MaxLength, MinLength } from "class-validator";
-
-export class CreateUserDriverDto {
-
+import { 
+    IsString, 
+    IsEmail, 
+    IsNumber, 
+    MinLength, 
+    MaxLength, 
+    Matches, 
+    IsEnum,  
+  } from 'class-validator';
+  
+  export class CreateDriverDto {
+    
     @IsString()
-    DriverId: string
-
+    DriverId: string;
+  
     @IsString()
     DriverName: string;
-
-    @IsEmail()
-    EmailAdress: string;
-
+  
+    @IsEmail({}, { message: 'O endereço de e-mail deve ser válido.' })
+    EmailAddress: string;
+  
     @IsString()
     @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
     @MaxLength(16, { message: 'A senha deve ter no máximo 16 caracteres.' })
     @Matches(/(?=.*[a-z])/, {
-        message: 'A senha deve conter pelo menos uma letra minúscula.',
+      message: 'A senha deve conter pelo menos uma letra minúscula.',
     })
     @Matches(/(?=.*[A-Z])/, {
-        message: 'A senha deve conter pelo menos uma letra maiúscula.',
+      message: 'A senha deve conter pelo menos uma letra maiúscula.',
     })
     @Matches(/(?=.*\d)/, {
-        message: 'A senha deve conter pelo menos um número.',
+      message: 'A senha deve conter pelo menos um número.',
     })
     @Matches(/(?=.*[@$!%*?&])/, {
-        message: 'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &).',
+      message: 'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &).',
     })
-    password: string;
-
+    Password: string;
+  
     @IsString()
     CarId: string;
-
-    @IsNumber()
+  
+    @IsNumber({}, { message: 'O número de telefone deve ser válido.' })
     PhoneNumber: number;
-    
-    @IsNumber()
+  
+    @IsNumber({}, { message: 'O saldo deve ser um número.' })
     Saldo: number;
   
-    @IsString()
-    StatusAccount: "Aproved" | "Rejected" | "Analizing";
-
-    @IsString()
-    StatusWorking: "Online" | "Offline" | "InRace" ;
+    @IsEnum(['Aproved', 'Rejected', 'Analizing'], { message: 'Status da conta inválido.' })
+    StatusAccount: 'Aproved' | 'Rejected' | 'Analizing';
   
-    @IsNumber()
-    RacesCanceleds : number;
-
-    @IsNumber()
-    RacesCompleteds : number;
+    @IsEnum(['Online', 'Offline', 'InRace'], { message: 'Status de trabalho inválido.' })
+    StatusWorking: 'Online' | 'Offline' | 'InRace';
+  
+    @IsNumber({}, { message: 'Corridas canceladas deve ser um número.' })
+    RacesCanceleds: number;
+  
+    @IsNumber({}, { message: 'Corridas completadas deve ser um número.' })
+    RacesCompleteds: number;
   
     @IsString()
-    LastConnectedDeivice: string;
-
-    @IsString()
-    Cnh: string; // PDF
-
-}
+    LastConnectedDevice: string;
+  
+    @Matches(/\.pdf$/, { message: 'A CNH deve ser um arquivo PDF.' })
+    Cnh: string; // Caminho ou nome do PDF
+  }
+  

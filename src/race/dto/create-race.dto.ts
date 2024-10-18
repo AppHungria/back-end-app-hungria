@@ -57,5 +57,9 @@ import {
     @IsOptional()
     @IsString()
     ComentPassenger?: string;
+
+    @IsOptional()
+    @IsString()
+    ComentDriver?: string;
   }
   
