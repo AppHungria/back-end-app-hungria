@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsNumber, IsOptional, IsString, MinLength } from "class-validator";
+import { IsBoolean, IsEmail, IsNumber, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserPassengerDto {
 
@@ -12,25 +12,41 @@ export class CreateUserPassengerDto {
     EmailAdress: string;
 
     @IsString()
-    Password: string;
+    @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
+    @MaxLength(16, { message: 'A senha deve ter no máximo 16 caracteres.' })
+    @Matches(/(?=.*[a-z])/, {
+      message: 'A senha deve conter pelo menos uma letra minúscula.',
+    })
+    @Matches(/(?=.*[A-Z])/, {
+      message: 'A senha deve conter pelo menos uma letra maiúscula.',
+    })
+    @Matches(/(?=.*\d)/, {
+      message: 'A senha deve conter pelo menos um número.',
+    })
+    @Matches(/(?=.*[@$!%*?&])/, {
+      message: 'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &).',
+    })
+    password: string;
 
     @IsNumber()
     PhoneNumber: number;
-  
+
     @IsString()
-    StatusAccount: "Aproved" | "Rejected" | "Analizing" ;
+    StatusAccount: "Aproved" | "Rejected" | "Analizing";
   
     @IsNumber()
     RacesCanceleds : number;
 
     @IsNumber()
     RacesCompleteds : number;
-
-    @IsString()
-    @MinLength(6, { message: 'Password must be at least 6 characters long.' })
-    password: string;
   
     @IsString()
     LastConnectedDeivice: string;
+
+    @IsString()
+    Documentation: string; // PDF || IMG
+
+    @IsString()
+    UserImg: string; // Imagem
 
 }

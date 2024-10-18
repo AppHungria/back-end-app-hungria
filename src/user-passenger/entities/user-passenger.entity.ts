@@ -16,9 +16,11 @@ export class UserPassenger {
 
     RacesCompleteds : number;
 
-    password: string;
-
     LastConnectedDeivice: string;
+
+    Documentation: string; // PDF || IMG
+
+    UserImg: string; // Imagem
 
 }
 

@@ -1,4 +1,4 @@
-import { IsEmail, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNumber, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserDriverDto {
 
@@ -6,14 +6,26 @@ export class CreateUserDriverDto {
     DriverId: string
 
     @IsString()
-    Name: string;
+    DriverName: string;
 
     @IsEmail()
     EmailAdress: string;
 
     @IsString()
-    @MinLength(6, { message: 'Password must be at least 6 characters long.' })
-    @MaxLength(16 , {message: 'Password must be at max 16 characters long.' })
+    @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
+    @MaxLength(16, { message: 'A senha deve ter no máximo 16 caracteres.' })
+    @Matches(/(?=.*[a-z])/, {
+        message: 'A senha deve conter pelo menos uma letra minúscula.',
+    })
+    @Matches(/(?=.*[A-Z])/, {
+        message: 'A senha deve conter pelo menos uma letra maiúscula.',
+    })
+    @Matches(/(?=.*\d)/, {
+        message: 'A senha deve conter pelo menos um número.',
+    })
+    @Matches(/(?=.*[@$!%*?&])/, {
+        message: 'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &).',
+    })
     password: string;
 
     @IsString()
@@ -21,13 +33,12 @@ export class CreateUserDriverDto {
 
     @IsNumber()
     PhoneNumber: number;
-
     
     @IsNumber()
     Saldo: number;
   
     @IsString()
-    StatusAccount: "Aproved" | "Rejected" | "Analizing" ;
+    StatusAccount: "Aproved" | "Rejected" | "Analizing";
 
     @IsString()
     StatusWorking: "Online" | "Offline" | "InRace" ;
@@ -40,5 +51,8 @@ export class CreateUserDriverDto {
   
     @IsString()
     LastConnectedDeivice: string;
+
+    @IsString()
+    Cnh: string; // PDF
 
 }
