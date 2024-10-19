@@ -1,11 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserPassengerDto } from './dto/create-user-passenger.dto';
 import { UpdateUserPassengerDto } from './dto/update-user-passenger.dto';
+import { prisma } from 'src/database/prismaServiceDatabase';
+
+
 
 @Injectable()
 export class UserPassengerService {
-  create(createUserPassengerDto: CreateUserPassengerDto) {
-    return 'This action adds a new userPassenger';
+
+  async create(data : CreateUserPassengerDto) {
+
+    return await prisma.userPassenger.create({data: {
+      Name: data.Name,
+      EmailAdress: data.EmailAdress,
+      Password: data.Password,
+      PhoneNumber: data.PhoneNumber,
+      StatusAccount: data.StatusAccount,
+      RacesCanceleds: data.RacesCanceleds,
+      RacesCompleteds: data.RacesCompleteds,
+      LastConnectedDevice: data.LastConnectedDevice,
+      Documentation: data.Documentation,
+      UserImg: data.UserImg,
+    },});
+
   }
 
   findAll() {

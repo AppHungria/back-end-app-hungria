@@ -7,19 +7,17 @@ import {
   Matches, 
   IsEnum, 
   IsOptional, 
-  IsUrl 
+  IsUrl, 
+  IsInt
 } from 'class-validator';
 
-export class CreateUserDto {
+export class CreateUserPassengerDto {
   
   @IsString()
-  userId: string;
-
-  @IsString()
-  name: string;
+  Name: string;
 
   @IsEmail({}, { message: 'O endereço de e-mail deve ser válido.' })
-  emailAddress: string;
+  EmailAdress: string;
 
   @IsString()
   @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
@@ -36,30 +34,30 @@ export class CreateUserDto {
   @Matches(/(?=.*[@$!%*?&])/, {
     message: 'A senha deve conter pelo menos um caractere especial (@, $, !, %, *, ?, &).',
   })
-  password: string;
+  Password: string;
 
-  @IsNumber({}, { message: 'O número de telefone deve ser válido.' })
-  phoneNumber: number;
+  @IsInt()
+  PhoneNumber: number;
 
   @IsEnum(['Aproved', 'Rejected', 'Analizing'], { message: 'Status da conta inválido.' })
-  statusAccount: 'Aproved' | 'Rejected' | 'Analizing';
+  StatusAccount: 'Aproved' | 'Rejected' | 'Analizing';
 
-  @IsNumber({}, { message: 'Corridas canceladas deve ser um número.' })
-  racesCanceleds: number;
+  @IsInt()
+  RacesCanceleds: number;
 
-  @IsNumber({}, { message: 'Corridas completadas deve ser um número.' })
-  racesCompleteds: number;
+  @IsInt()
+  RacesCompleteds: number;
 
   @IsString()
-  lastConnectedDevice: string;
+  LastConnectedDevice: string;
 
   @IsString()
   // @Matches(/\.(pdf|jpg|jpeg|png)$/i, { 
   //   message: 'A documentação deve ser um PDF ou uma imagem (JPG, JPEG, PNG).' 
   // })
-  documentation: string;
+  Documentation: string;
 
   @IsOptional()
   @IsUrl({}, { message: 'A imagem do usuário deve ser uma URL válida.' })
-  userImg?: string;
+  UserImg?: string;
 }

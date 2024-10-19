@@ -8,7 +8,7 @@ import {
     IsEnum,  
   } from 'class-validator';
   
-  export class CreateDriverDto {
+  export class CreateUserDriverDto {
     
     @IsString()
     DriverId: string;
