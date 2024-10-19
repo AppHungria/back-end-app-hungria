@@ -2,7 +2,7 @@
 CREATE TYPE "StatusAccountEnum" AS ENUM ('Aproved', 'Rejected', 'Analizing');
 
 -- CreateTable
-CREATE TABLE "UserPassenger" (
+CREATE TABLE "userPassenger" (
     "UserId" SERIAL NOT NULL,
     "Name" TEXT NOT NULL,
     "EmailAdress" TEXT NOT NULL,
@@ -13,10 +13,10 @@ CREATE TABLE "UserPassenger" (
     "RacesCompleteds" INTEGER NOT NULL,
     "LastConnectedDevice" TEXT NOT NULL,
     "Documentation" TEXT NOT NULL,
-    "UserImg" TEXT NOT NULL,
+    "UserImg" TEXT,
 
-    CONSTRAINT "UserPassenger_pkey" PRIMARY KEY ("UserId")
+    CONSTRAINT "userPassenger_pkey" PRIMARY KEY ("UserId")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "UserPassenger_EmailAdress_key" ON "UserPassenger"("EmailAdress");
+CREATE UNIQUE INDEX "userPassenger_EmailAdress_key" ON "userPassenger"("EmailAdress");

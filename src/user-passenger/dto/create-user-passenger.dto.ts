@@ -36,8 +36,8 @@ export class CreateUserPassengerDto {
   })
   Password: string;
 
-  @IsInt()
-  PhoneNumber: number;
+  @IsString()
+  PhoneNumber: string;
 
   @IsEnum(['Aproved', 'Rejected', 'Analizing'], { message: 'Status da conta inválido.' })
   StatusAccount: 'Aproved' | 'Rejected' | 'Analizing';
@@ -58,6 +58,6 @@ export class CreateUserPassengerDto {
   Documentation: string;
 
   @IsOptional()
-  @IsUrl({}, { message: 'A imagem do usuário deve ser uma URL válida.' })
+  @IsString()
   UserImg?: string;
 }

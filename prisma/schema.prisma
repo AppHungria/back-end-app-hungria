@@ -24,7 +24,7 @@ model userPassenger {
   Name                  String
   EmailAdress           String   @unique
   Password              String
-  PhoneNumber           Int      
+  PhoneNumber           String      
   StatusAccount         StatusAccountEnum  // Uso de Enum
   RacesCanceleds        Int      
   RacesCompleteds       Int      

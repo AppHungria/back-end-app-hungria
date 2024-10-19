@@ -9,6 +9,7 @@ export class UserPassengerController {
 
   @Post()
   create(@Body() createUserPassengerDto: CreateUserPassengerDto) {
+    
     return this.userPassengerService.create(createUserPassengerDto);
   }
 

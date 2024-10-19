@@ -10,6 +10,11 @@ export class UserPassengerService {
 
   async create(data : CreateUserPassengerDto) {
 
+    if(!data.UserImg){
+      data = null
+    }
+
+
     return await prisma.userPassenger.create({data: {
       Name: data.Name,
       EmailAdress: data.EmailAdress,
