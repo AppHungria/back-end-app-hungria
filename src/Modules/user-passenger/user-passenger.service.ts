@@ -4,8 +4,6 @@ import { UpdateUserPassengerDto } from './dto/update-user-passenger.dto';
 import { prisma } from 'src/database/prismaServiceDatabase';
 
 
-
-
 @Injectable()
 export class UserPassengerService {
 
@@ -47,8 +45,37 @@ export class UserPassengerService {
 
 
   async update(id: number, updateUserPassengerDto: UpdateUserPassengerDto) {
-    return `This action updates a #${id} userPassenger`;
+    const data = await this.findOne(id);
+  
+    if (!Array.isArray(data) || data.length === 0) {
+      console.log('Não encontrado:', data);
+      return 'Não encontrado';
+    }
+  
+    const existingUser = data[0];
+    console.log('Usuário encontrado:', existingUser);
+  
+  
+    const newUserData = {
+      ...existingUser,
+      ...updateUserPassengerDto,
+    };
+  
+   
+    try {
+      const updatedUser = await prisma.userPassenger.update({
+        where: { UserId: id }, 
+        data: newUserData, 
+      });
+  
+      console.log('Usuário atualizado:', updatedUser);
+      return updatedUser;
+    } catch (error) {
+      console.error('Erro ao atualizar usuário:', error);
+      throw new Error('Não foi possível atualizar o usuário.');
+    }
   }
+
 
   async remove(id: number) {
 
