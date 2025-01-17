@@ -31,19 +31,29 @@ export class UserPassengerService {
 
   }
 
-  findAll() {
-    return `This action returns all userPassenger`;
+  async findAll() {
+
+    return prisma.userPassenger.findMany()
+
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userPassenger`;
+  async findOne(id: number) {
+
+     return prisma.userPassenger.findMany({
+      where: {UserId: id},
+    });
+
   }
 
-  update(id: number, updateUserPassengerDto: UpdateUserPassengerDto) {
+
+  async update(id: number, updateUserPassengerDto: UpdateUserPassengerDto) {
     return `This action updates a #${id} userPassenger`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} userPassenger`;
+  async remove(id: number) {
+
+     prisma.userPassenger.delete({where: {UserId: id}})
+
+     return "deleted"
   }
 }
