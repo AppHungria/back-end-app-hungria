@@ -33,4 +33,3 @@ model userPassenger {
   UserImg               String?
 }
 
-

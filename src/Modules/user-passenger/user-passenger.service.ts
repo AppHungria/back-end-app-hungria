@@ -13,6 +13,14 @@ export class UserPassengerService {
       data = null
     }
 
+    const existUser = await this.findAll()
+
+
+    const exist = existUser.find(user => user.EmailAdress == data.EmailAdress)
+
+   
+    if(exist){ return "já existe este e-mail"}
+
 
     return await prisma.userPassenger.create({data: {
       Name: data.Name,
@@ -24,7 +32,7 @@ export class UserPassengerService {
       RacesCompleteds: data.RacesCompleteds,
       LastConnectedDevice: data.LastConnectedDevice,
       Documentation: data.Documentation,
-      UserImg: data.UserImg,
+      UserImg: data.UserImg 
     },});
 
   }

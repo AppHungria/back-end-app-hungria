@@ -1,8 +1,8 @@
 export class UserPassenger {
  
-    UserId: string
+    UserId: string;
     Name: string;
-    EmailAdress: string;
+    EmailAdress: string ;
     Password: string;
     PhoneNumber: string;
     StatusAccount: "Aproved" | "Rejected" | "Analizing" ;

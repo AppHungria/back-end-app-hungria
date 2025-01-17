@@ -1,13 +1,11 @@
 import { 
   IsString, 
   IsEmail, 
-  IsNumber, 
   MinLength, 
   MaxLength, 
   Matches, 
   IsEnum, 
-  IsOptional, 
-  IsUrl, 
+  IsOptional,  
   IsInt
 } from 'class-validator';
 
