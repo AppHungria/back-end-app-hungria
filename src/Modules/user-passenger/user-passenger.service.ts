@@ -37,9 +37,20 @@ export class UserPassengerService {
 
   }
 
-  async findAll() {
+  async findAll(filters?, skip?:number, take?){
 
-    return prisma.userPassenger.findMany()
+    try {
+      const users = await prisma.userPassenger.findMany({
+        where: filters || {}, 
+        skip: skip || 0,  
+        take: take || 10
+      });
+  
+      return users;
+    } catch (error) {
+      console.error('Erro ao buscar passageiros:', error);
+      throw new Error('Não foi possível buscar os passageiros.');
+    }
 
   }
 
@@ -87,8 +98,10 @@ export class UserPassengerService {
 
   async remove(id: number) {
 
-     prisma.userPassenger.delete({where: {UserId: id}})
+    prisma.userPassenger.delete({where: {UserId: id}})
 
-     return "deleted"
+    return "deleted"
+
   }
+  
 }
